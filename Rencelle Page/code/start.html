@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Surprise!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts">
+        <div class="heart" style="left: 5%; top: 10%; animation-delay: 0s;"></div>
+        <div class="heart" style="left: 15%; top: 20%; animation-delay: 1s;"></div>
+        <div class="heart" style="left: 85%; top: 15%; animation-delay: 1.5s;"></div>
+        <div class="heart" style="left: 90%; top: 30%; animation-delay: 2.5s;"></div>
+        <div class="heart" style="left: 10%; top: 70%; animation-delay: 3s;"></div>
+        <div class="heart" style="left: 20%; top: 85%; animation-delay: 0.5s;"></div>
+        <div class="heart" style="left: 75%; top: 75%; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 80%; top: 90%; animation-delay: 3.5s;"></div>
+    </div>
+    
+    <section class="start-section">
+        <div class="start-gif">
+            <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aG9jdWIzeTJka21keDg0MmxiMXljdDlrNTRncTFnanhkZGVvb3hpbCZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/5p8jOW3f00osS705g3/giphy.gif" alt="Heart animation">
+        </div>
+        
+        <h1 class="start-title">Hello! <br>Baby!</h1>
+        
+        <p class="start-message">I have a little surprise for you!</p>
+        
+        <div class="start-buttons">
+            <a href="mainpage.html" class="yes-btn-start">
+                <i class="fas fa-heart"></i> Yes! I want to see it! <i class="fas fa-heart"></i>
+            </a>
+            
+            <button class="no-btn" id="tricky">
+                No! I don't want to see it!
+            </button>
+        </div>
+        
+        <div class="start-footer">
+            <p>Made with <i class="fas fa-heart" style="color: #ff7eb3;"></i> for Valentine's Day</p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.querySelector('.start-section');
+            const btn = document.getElementById('tricky');
+            if (!section || !btn) return;
+
+            section.style.position = 'relative';
+            btn.style.transition = 'left 0.18s ease, top 0.18s ease, opacity 0.12s ease';
+
+            function moveRandom() {
+                const rect = section.getBoundingClientRect();
+                const maxLeft = Math.max(0, rect.width - btn.offsetWidth);
+                const maxTop  = Math.max(0, rect.height - btn.offsetHeight);
+
+                const left = Math.floor(Math.random() * (maxLeft + 1));
+                const top  = Math.floor(Math.random() * (maxTop + 1));
+
+                btn.style.opacity = '0';
+                setTimeout(() => {
+                    btn.style.left = left + 'px';
+                    btn.style.top  = top  + 'px';
+                    btn.style.opacity = '1';
+                }, 120);
+            }
+
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (!btn.dataset.abs) {
+                    const btnRect = btn.getBoundingClientRect();
+                    const secRect = section.getBoundingClientRect();
+                    btn.style.position = 'absolute';
+                    btn.style.left = (btnRect.left - secRect.left) + 'px';
+                    btn.style.top  = (btnRect.top  - secRect.top)  + 'px';
+                    btn.dataset.abs = 'true';
+                    setTimeout(moveRandom, 50);
+                    return;
+                }
+                moveRandom();
+            });
+
+            btn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                if (!btn.dataset.abs) {
+                    const btnRect = btn.getBoundingClientRect();
+                    const secRect = section.getBoundingClientRect();
+                    btn.style.position = 'absolute';
+                    btn.style.left = (btnRect.left - secRect.left) + 'px';
+                    btn.style.top  = (btnRect.top  - secRect.top)  + 'px';
+                    btn.dataset.abs = 'true';
+                    setTimeout(moveRandom, 50);
+                    return;
+                }
+                moveRandom();
+            }, {passive: false});
+        });
+    </script>
+</body>
+</html>

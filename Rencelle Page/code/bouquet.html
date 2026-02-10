@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Valentine's Bouquet</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts">
+        <div class="heart" style="left: 5%; top: 10%; animation-delay: 0s;"></div>
+        <div class="heart" style="left: 15%; top: 20%; animation-delay: 1s;"></div>
+        <div class="heart" style="left: 85%; top: 15%; animation-delay: 1.5s;"></div>
+        <div class="heart" style="left: 90%; top: 30%; animation-delay: 2.5s;"></div>
+        <div class="heart" style="left: 10%; top: 70%; animation-delay: 3s;"></div>
+        <div class="heart" style="left: 20%; top: 85%; animation-delay: 0.5s;"></div>
+        <div class="heart" style="left: 75%; top: 75%; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 80%; top: 90%; animation-delay: 3.5s;"></div>
+    </div>
+    
+    <!-- Back Button with History Tracking -->
+    <button class="back-btn" id="backBtn">
+        <i class="fas fa-arrow-left"></i> Back
+    </button>
+    
+    <div class="container bouquet-section">
+        <h1 class="bouquet-title">Your Valentine's Bouquet</h1>
+        
+        <div class="bouquet-image-placeholder" id="bouquetImage">
+            <!-- REPLACE THE IMAGE URL BELOW WITH YOUR BOUQUET IMAGE -->
+            <div class="bouquet-image-container">
+                <!-- Your bouquet image will display here when you add the URL -->
+                <img src="../images/flower-removebg-preview.png" alt="Valentine's Bouquet" class="bouquet-uploaded-image" id="bouquetUploadedImage">
+                
+                <div class="bouquet-placeholder-content">
+                    <i class="fas fa-gift placeholder-icon" style="font-size: 4rem;"></i>
+                    <span class="placeholder-text" style="font-size: 1.6rem;">Add Your Bouquet Image</span>
+                    <p class="image-hint">Replace the image URL in the HTML code</p>
+                </div>
+            </div>
+        </div>
+        
+        <p class="bouquet-message">For you, mahal!</p>
+        
+        <p class="bouquet-description">
+            Ypur favorite flowers.
+        </p>
+        
+        <button class="download-btn" id="downloadBouquet">
+            <i class="fas fa-download"></i> Download Your Bouquet
+        </button>
+        
+        <footer>
+            <p>Made with <i class="fas fa-heart" style="color: #ff7eb3;"></i> for Valentine's Day</p>
+            <p class="footer-nav">
+                <a href="start.html" class="footer-link">
+                    <i class="fas fa-home"></i> Back to Start Page
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Back button functionality with history tracking
+        document.getElementById('backBtn').addEventListener('click', function() {
+            // Save current page to session storage
+            sessionStorage.setItem('lastPage', 'bouquet');
+            
+            // Show loading state
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Going back...';
+            this.disabled = true;
+            
+            // Check if we have history from our site
+            if (window.history.length > 1) {
+                // If there's browser history, go back
+                setTimeout(() => {
+                    window.history.back();
+                }, 500);
+            } else {
+                // If no history, go to main page
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 500);
+            }
+        });
+        
+        // Download bouquet functionality
+        document.getElementById('downloadBouquet').addEventListener('click', function() {
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating your bouquet...';
+            this.disabled = true;
+            
+            // Simulate download process
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> Bouquet Downloaded!';
+                this.style.background = 'linear-gradient(to right, #4CAF50, #8BC34A)';
+                this.style.boxShadow = '0 5px 15px rgba(76, 175, 80, 0.3)';
+                
+                // Create a success message
+                const successMsg = document.createElement('div');
+                successMsg.innerHTML = '<i class="fas fa-heart"></i> Your bouquet has been saved!';
+                successMsg.style.cssText = `
+                    margin-top: 20px;
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 1.5rem;
+                    color: #d1477a;
+                    animation: fadeIn 0.5s ease;
+                `;
+                
+                this.parentNode.insertBefore(successMsg, this.nextSibling);
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.background = 'linear-gradient(to right, #ff7eb3, #ff9ec5)';
+                    this.style.boxShadow = '0 8px 25px rgba(255, 126, 179, 0.3)';
+                    this.disabled = false;
+                    successMsg.remove();
+                }, 3000);
+            }, 2000);
+        });
+        
+        // Check if bouquet image exists and show/hide placeholder
+        document.addEventListener('DOMContentLoaded', function() {
+            const bouquetImage = document.getElementById('bouquetUploadedImage');
+            
+            // Function to test if an image exists
+            function checkImageExists(imageUrl, callback) {
+                const img = new Image();
+                img.onload = function() {
+                    callback(true);
+                };
+                img.onerror = function() {
+                    callback(false);
+                };
+                img.src = imageUrl;
+            }
+            
+            // Check if image exists
+            if (bouquetImage.src) {
+                checkImageExists(bouquetImage.src, function(exists) {
+                    if (exists) {
+                        document.getElementById('bouquetImage').classList.add('has-image');
+                    }
+                });
+            }
+            
+            // Add some floating flowers to the page
+            const container = document.querySelector('.bouquet-section');
+            const flowers = ['🌹', '🌷', '🌻', '💐', '🌸'];
+            
+            for (let i = 0; i < 6; i++) {
+                const flower = document.createElement('div');
+                flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                flower.style.position = 'absolute';
+                flower.style.left = `${Math.random() * 100}%`;
+                flower.style.top = `${Math.random() * 100}%`;
+                flower.style.fontSize = `${Math.random() * 24 + 24}px`;
+                flower.style.opacity = '0.4';
+                flower.style.pointerEvents = 'none';
+                flower.style.animation = `gentleFloat ${4 + Math.random() * 5}s ease-in-out infinite`;
+                flower.style.animationDelay = `${Math.random() * 2}s`;
+                flower.style.zIndex = '0';
+                
+                container.appendChild(flower);
+            }
+        });
+    </script>
+</body>
+</html>

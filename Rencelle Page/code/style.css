@@ -1,0 +1,885 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fffaf9;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Floating Hearts */
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 126, 179, 0.15);
+    transform: rotate(45deg);
+    animation: float 8s ease-in-out infinite;
+}
+
+.heart:before, .heart:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 126, 179, 0.15);
+    border-radius: 50%;
+}
+
+.heart:before {
+    top: -10px;
+    left: 0;
+}
+
+.heart:after {
+    top: 0;
+    left: -10px;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: rotate(45deg) translateY(0);
+        opacity: 0.15;
+    }
+    50% {
+        transform: rotate(45deg) translateY(-20px);
+        opacity: 0.3;
+    }
+}
+
+/* Back Button */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 126, 179, 0.3);
+    color: #d1477a;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.back-btn:hover {
+    background-color: white;
+    border-color: #ff7eb3;
+    box-shadow: 0 5px 15px rgba(255, 126, 179, 0.2);
+    transform: translateX(-3px);
+    text-decoration: none;
+    color: #d1477a;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #d1477a;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #888;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+/* Landscape Polaroid image */
+.polaroid-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.polaroid {
+    width: 500px; /* Wider for landscape */
+    background-color: white;
+    padding: 20px 20px 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transform: rotate(1deg);
+    border-radius: 4px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.polaroid-border {
+    border: 1px solid #f0f0f0;
+    height: 280px; /* Reduced height for landscape ratio */
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fff5f9, #f0f9ff);
+    color: #ff7eb3;
+    border: 2px dashed rgba(255, 126, 179, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.image-placeholder:hover {
+    background: linear-gradient(135deg, #fff0f5, #e6f7ff);
+    border-color: rgba(255, 126, 179, 0.6);
+}
+
+.placeholder-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.image-placeholder:hover .placeholder-icon {
+    transform: scale(1.1);
+}
+
+.placeholder-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: #d1477a;
+    font-weight: 600;
+}
+
+.upload-btn {
+    background: linear-gradient(to right, #ff7eb3, #ff9ec5);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+.upload-btn:hover {
+    background: linear-gradient(to right, #ff6ba3, #ff8ab8);
+    transform: translateY(-2px);
+}
+
+.polaroid-caption {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    color: #777;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.polaroid:hover .polaroid-caption {
+    color: #d1477a;
+}
+
+/* Image Container Styles */
+.image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.uploaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.image-placeholder.has-image .placeholder-content {
+    display: none;
+}
+
+.image-placeholder.has-image .uploaded-image {
+    display: block;
+}
+
+/* Updated Polaroid for larger images */
+.polaroid {
+    width: 550px; /* Even wider for better landscape display */
+    background-color: white;
+    padding: 20px 20px 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transform: rotate(1deg);
+    border-radius: 4px;
+    transition: all 0.4s ease;
+}
+
+.polaroid-border {
+    border: 1px solid #f0f0f0;
+    height: 320px; /* Taller for better image display */
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+/* Updated Bouquet page styles */
+.bouquet-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bouquet-image-container {
+    width: 100%;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #fff5f9, #f0f9ff);
+}
+
+.bouquet-uploaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bouquet-placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bouquet-image-placeholder.has-image .bouquet-placeholder-content {
+    display: none;
+}
+
+.bouquet-image-placeholder.has-image .bouquet-uploaded-image {
+    display: block;
+}
+
+/* Activity cards */
+.activities {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.activity-card {
+    width: 320px;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+}
+
+.activity-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.card-image.game {
+    background-color: #f0f7ff;
+}
+
+.card-image.movie {
+    background-color: #fff0f5;
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    color: #d1477a;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-title i {
+    font-size: 1.3rem;
+    margin-left: 5px;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.card-description {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Flower section */
+.flower-section {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.flower-icon {
+    display: inline-block;
+    font-size: 3rem;
+    color: #ff7eb3;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    margin-bottom: 20px;
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.flower-icon:hover {
+    transform: rotate(15deg) scale(1.1);
+    color: #d1477a;
+}
+
+/* Yes Button Section */
+.yes-section {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.yes-btn {
+    background: linear-gradient(to right, #ff7eb3, #d1477a);
+    color: white;
+    border: none;
+    padding: 20px 50px;
+    border-radius: 60px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(255, 126, 179, 0.4);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.yes-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 126, 179, 0.6);
+    background: linear-gradient(to right, #ff6ba3, #c93c6e);
+}
+
+.yes-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.yes-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s ease;
+    z-index: 1;
+}
+
+.yes-btn:hover::before {
+    left: 100%;
+}
+
+.yes-btn i {
+    position: relative;
+    z-index: 2;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.response-message {
+    margin-top: 25px;
+    min-height: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #d1477a;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px 0;
+    color: #aaa;
+    font-size: 0.95rem;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 40px;
+}
+
+/* Start Page Styles */
+.start-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.start-gif {
+    margin-bottom: 30px;
+    max-width: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(255, 126, 179, 0.3);
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+.start-gif img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.start-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    color: #d1477a;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.start-message {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.start-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 40px;
+}
+
+.yes-btn-start {
+    display: inline-block;
+    background: linear-gradient(to right, #ff7eb3, #d1477a);
+    color: white;
+    text-decoration: none;
+    padding: 18px 35px;
+    border-radius: 60px;
+    font-size: 1.3rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(255, 126, 179, 0.4);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+}
+
+.yes-btn-start:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 126, 179, 0.6);
+    background: linear-gradient(to right, #ff6ba3, #c93c6e);
+}
+
+.yes-btn-start i {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.no-btn {
+    background: linear-gradient(to right, #f0f0f0, #e0e0e0);
+    color: #666;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 60px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.no-btn:hover {
+    background: linear-gradient(to right, #e6e6e6, #d6d6d6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.start-footer {
+    margin-top: 40px;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+/* Updated Bouquet Image Container */
+.bouquet-image-container {
+    width: 1024px; /* Set width to 1024px */
+    height: 1024px; /* Set height to 1024px */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 0 auto 30px; /* Center the container */
+    background: linear-gradient(135deg, #fff5f9, #f0f9ff);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 126, 179, 0.2);
+}
+
+/* Make sure the image fills the container */
+.bouquet-uploaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.bouquet-uploaded-image:hover {
+    transform: scale(1.02);
+}
+
+/* Update placeholder icon size for larger container */
+.bouquet-image-placeholder .placeholder-icon {
+    font-size: 5rem !important;
+    margin-bottom: 30px;
+}
+
+.bouquet-image-placeholder .placeholder-text {
+    font-size: 2rem !important;
+}
+
+.bouquet-image-placeholder .image-hint {
+    font-size: 1rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Responsive adjustments for large image container */
+@media (max-width: 1200px) {
+    .bouquet-image-container {
+        width: 900px;
+        height: 900px;
+    }
+}
+
+@media (max-width: 992px) {
+    .bouquet-image-container {
+        width: 768px;
+        height: 768px;
+    }
+}
+
+@media (max-width: 850px) {
+    .bouquet-image-container {
+        width: 600px;
+        height: 600px;
+    }
+    
+    .bouquet-image-placeholder .placeholder-icon {
+        font-size: 4rem !important;
+    }
+    
+    .bouquet-image-placeholder .placeholder-text {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 650px) {
+    .bouquet-image-container {
+        width: 450px;
+        height: 450px;
+    }
+}
+
+@media (max-width: 500px) {
+    .bouquet-image-container {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .bouquet-image-placeholder .placeholder-icon {
+        font-size: 3rem !important;
+    }
+    
+    .bouquet-image-placeholder .placeholder-text {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .bouquet-image-container {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* Add a subtle animation for the container */
+@keyframes containerAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bouquet-image-container {
+    animation: containerAppear 0.8s ease-out;
+}
+
+/* Optional: Add a decorative frame effect */
+.bouquet-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 8px solid rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.bouquet-image-container::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid rgba(255, 126, 179, 0.1);
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 1;
+}   
+
+.bouquet-message {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #d1477a;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bouquet-description {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.download-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #ff7eb3, #ff9ec5);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(255, 126, 179, 0.3);
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 126, 179, 0.4);
+    background: linear-gradient(to right, #ff6ba3, #ff8ab8);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .polaroid {
+        width: 400px;
+    }
+    
+    .activities {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .activity-card {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .yes-btn {
+        padding: 18px 40px;
+        font-size: 1.3rem;
+    }
+    
+    .back-btn {
+        top: 15px;
+        left: 15px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .start-title {
+        font-size: 2.8rem;
+    }
+    
+    .bouquet-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.3rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .polaroid {
+        width: 320px;
+    }
+    
+    .polaroid-border {
+        height: 200px;
+    }
+    
+    .yes-btn {
+        padding: 16px 30px;
+        font-size: 1.1rem;
+        gap: 10px;
+    }
+    
+    .start-title {
+        font-size: 2.3rem;
+    }
+    
+    .bouquet-title {
+        font-size: 2rem;
+    }
+    
+    .pixel-bouquet {
+        width: 280px;
+        height: 380px;
+    }
+}
+

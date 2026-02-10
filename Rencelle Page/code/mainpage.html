@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine | Special Message</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts">
+        <div class="heart" style="left: 5%; top: 10%; animation-delay: 0s;"></div>
+        <div class="heart" style="left: 15%; top: 20%; animation-delay: 1s;"></div>
+        <div class="heart" style="left: 85%; top: 15%; animation-delay: 1.5s;"></div>
+        <div class="heart" style="left: 90%; top: 30%; animation-delay: 2.5s;"></div>
+        <div class="heart" style="left: 10%; top: 70%; animation-delay: 3s;"></div>
+        <div class="heart" style="left: 20%; top: 85%; animation-delay: 0.5s;"></div>
+        <div class="heart" style="left: 75%; top: 75%; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 80%; top: 90%; animation-delay: 3.5s;"></div>
+    </div>
+    
+    <!-- Back Button -->
+    <a href="start.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Start
+    </a>
+    
+    <div class="container">
+        <header>
+            <h1>Do you want to be my valentine?</h1>
+            <div class="subtitle">A MINIMALIST CELEBRATION OF LOVE</div>
+        </header>
+        
+        <div class="polaroid-container">
+            <div class="polaroid">
+                <div class="polaroid-border">
+                    <div class="image-placeholder" id="polaroidImage">
+                        <!-- REPLACE THE IMAGE URL BELOW WITH YOUR OWN IMAGE -->
+                        <div class="image-container">
+                            <!-- Your image will display here when you add the URL -->
+                            <img src="../images/gf.jpg" alt="Our Memory" class="uploaded-image" id="polaroidUploadedImage">
+                            
+                            <div class="placeholder-content">
+                                <i class="fas fa-image placeholder-icon"></i>
+                                <span class="placeholder-text">Add Your Image Here</span>
+                                <p class="image-hint">Replace the image URL in the HTML code</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid-caption">Our Special Memory Together</div>
+            </div>
+        </div>
+        
+        <div class="activities">
+            <div class="activity-card">
+                <div class="card-image game">
+                    <div class="image-placeholder large">
+                        <!-- You can also add images to activity cards -->
+                        <div class="placeholder-content">
+                            <i class="fas fa-gamepad placeholder-icon"></i>
+                            <span class="placeholder-text">Game Night</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Game Weekend <i class="fas fa-heart"></i></h3>
+                    <p class="card-description">A cozy weekend filled with your favorite board games, puzzles, and laughter. Let's create new memories while enjoying some friendly competition.</p>
+                </div>
+            </div>
+            
+            <div class="activity-card">
+                <div class="card-image movie">
+                    <div class="image-placeholder large">
+                        <div class="placeholder-content">
+                            <i class="fas fa-film placeholder-icon"></i>
+                            <span class="placeholder-text">Movie Night</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Movie Night <i class="fas fa-heart"></i></h3>
+                    <p class="card-description">An evening of classic rom-coms, homemade popcorn, and cuddles under a blanket. Your pick of films, my pick of snacks.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="yes-section">
+            <button class="yes-btn" id="yesBtn">
+                <i class="fas fa-heart"></i> Yes, I'll Be Your Valentine! <i class="fas fa-heart"></i>
+            </button>
+            <div class="response-message" id="responseMessage"></div>
+        </div>
+        
+        <footer>
+            <p>Made with <i class="fas fa-heart" style="color: #ff7eb3;"></i> for Valentine's Day</p>
+            <p class="footer-nav">
+                <a href="start.html" class="footer-link">
+                    <i class="fas fa-home"></i> Back to Start Page
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Back button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can add your image URL here programmatically
+            // Example: document.getElementById('polaroidUploadedImage').src = "YOUR_IMAGE_URL_HERE";
+            
+            // Or add it directly in the HTML img tag above
+            
+            // Yes button functionality
+            document.getElementById('yesBtn').addEventListener('click', function() {
+                const responseMessage = document.getElementById('responseMessage');
+                
+                // Create a shower of hearts animation
+                createHeartAnimation();
+                
+                // Show response message
+                responseMessage.textContent = "You've made me the happiest person! ❤️";
+                responseMessage.style.opacity = '1';
+                
+                // Change button text and redirect to bouquet page after 2 seconds
+                this.innerHTML = '<i class="fas fa-heart"></i> You Said Yes! Redirecting... <i class="fas fa-heart"></i>';
+                this.style.background = 'linear-gradient(to right, #4CAF50, #8BC34A)';
+                this.style.boxShadow = '0 10px 30px rgba(76, 175, 80, 0.4)';
+                this.disabled = true;
+                
+                // Add floating hearts to the container
+                addCelebrationHearts();
+                
+                // Redirect to bouquet page after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'bouquet.html';
+                }, 3000);
+            });
+            
+            // Function to test if an image exists
+            function checkImageExists(imageUrl, callback) {
+                const img = new Image();
+                img.onload = function() {
+                    callback(true);
+                };
+                img.onerror = function() {
+                    callback(false);
+                };
+                img.src = imageUrl;
+            }
+            
+            // Check if polaroid image exists and show/hide placeholder
+            const polaroidImage = document.getElementById('polaroidUploadedImage');
+            if (polaroidImage.src) {
+                checkImageExists(polaroidImage.src, function(exists) {
+                    if (exists) {
+                        document.getElementById('polaroidImage').classList.add('has-image');
+                    }
+                });
+            }
+        });
+        
+        function createHeartAnimation() {
+            const button = document.getElementById('yesBtn');
+            const rect = button.getBoundingClientRect();
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = `${rect.left + rect.width/2}px`;
+                heart.style.top = `${rect.top + rect.height/2}px`;
+                heart.style.fontSize = `${Math.random() * 20 + 15}px`;
+                heart.style.opacity = '0.9';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '1000';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 100;
+                const duration = 1 + Math.random() * 1;
+                
+                heart.style.animation = `
+                    heartFloat ${duration}s ease-out forwards,
+                    heartFade ${duration}s ease-out forwards
+                `;
+                
+                heart.style.setProperty('--end-x', `${Math.cos(angle) * distance}px`);
+                heart.style.setProperty('--end-y', `${Math.sin(angle) * distance - 50}px`);
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    document.body.removeChild(heart);
+                }, duration * 1000);
+            }
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes heartFloat {
+                    to {
+                        transform: translate(var(--end-x), var(--end-y)) rotate(360deg);
+                    }
+                }
+                
+                @keyframes heartFade {
+                    0%, 70% { opacity: 0.9; }
+                    100% { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function addCelebrationHearts() {
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${Math.random() * 24 + 16}px`;
+                heart.style.opacity = '0.7';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '5';
+                heart.style.animation = `gentleFloat ${3 + Math.random() * 4}s ease-in-out infinite`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                
+                container.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
