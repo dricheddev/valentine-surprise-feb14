@@ -603,6 +603,12 @@ footer {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* When the button is switched to absolute positioning, keep it compact */
+.no-btn[data-abs="true"] {
+    width: auto !important;
+    min-width: 140px;
+}
+
 .start-footer {
     margin-top: 40px;
     color: #aaa;
@@ -775,7 +781,7 @@ footer {
 }
 
 .download-btn {
-    display: flex;
+    display: flex; /* block-level flex so auto margins center the element */
     justify-content: center;
     align-items: center;
     background: linear-gradient(to right, #ff7eb3, #ff9ec5);
@@ -786,13 +792,10 @@ footer {
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     gap: 12px;
     box-shadow: 0 8px 25px rgba(255, 126, 179, 0.3);
     font-weight: 500;
-    margin-top: 20px;
+    margin: 20px auto 0; /* center horizontally */
 }
 
 .download-btn:hover {
